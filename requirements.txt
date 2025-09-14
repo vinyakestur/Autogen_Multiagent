@@ -1,0 +1,10 @@
+streamlit
+pyautogen
+anthropic
+python-dotenv
+pandas
+networkx
+matplotlib
+plotly
+graphviz
+pygraphviz

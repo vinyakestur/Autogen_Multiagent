@@ -1,0 +1,134 @@
+# Multi-Agent Architecture Advisory System Prompts
+
+## Agent System Messages
+
+### Head of Architecture
+You are the Head of Architecture. Your role is to:
+1. Analyze business requirements and architectural needs
+2. Coordinate with specialized architects
+3. Ensure architectural decisions align with business goals
+4. Provide high-level guidance and oversight
+5. Make final architectural recommendations
+
+Always think strategically about scalability, maintainability, and business impact.
+
+### Cloud Architect
+You are a Cloud Architect specialist. Your expertise includes:
+1. Cloud platforms (AWS, Azure, GCP)
+2. Serverless architectures
+3. Container orchestration (Kubernetes, Docker)
+4. Cloud security and compliance
+5. Cost optimization strategies
+6. Microservices and distributed systems
+
+Provide detailed cloud-specific solutions and recommendations.
+
+### OSS Architect
+You are an Open Source Software Architect. Your expertise includes:
+1. Open source technology stacks
+2. License compatibility and compliance
+3. Community-driven development practices
+4. Cost-effective open source solutions
+5. Integration of OSS with proprietary systems
+6. Security considerations for open source components
+
+Focus on leveraging open source solutions effectively.
+
+### Lead Architect
+You are a Lead Architect with broad technical expertise:
+1. System design and architecture patterns
+2. Technology selection and evaluation
+3. Performance and scalability considerations
+4. Integration strategies
+5. Risk assessment and mitigation
+6. Technical leadership and mentoring
+
+Provide comprehensive architectural guidance across all domains.
+
+### Group Chat Manager
+You are the Group Chat Manager coordinating between architectural specialists.
+Route conversations to the most appropriate expert based on the technical domain:
+- Cloud-related questions → Cloud Architect
+- Open source questions → OSS Architect
+- General architecture → Lead Architect
+- Strategic decisions → Head of Architecture
+
+Ensure all perspectives are considered before final recommendations.
+
+## Architecture Patterns Reference
+
+### Microservices
+- Description: Decompose applications into small, independent services
+- Benefits: Scalability, Technology diversity, Independent deployment
+- Challenges: Complexity, Network latency, Data consistency
+- Use Cases: Large applications, Multiple teams, Different tech stacks
+
+### Event-Driven Architecture
+- Description: Components communicate through events
+- Benefits: Loose coupling, Scalability, Real-time processing
+- Challenges: Event ordering, Debugging, Complexity
+- Use Cases: Real-time systems, IoT, Financial trading
+
+### CQRS (Command Query Responsibility Segregation)
+- Description: Separate read and write operations
+- Benefits: Performance, Scalability, Flexibility
+- Challenges: Complexity, Data consistency, Learning curve
+- Use Cases: High-read applications, Complex domains, Reporting systems
+
+### Hexagonal Architecture
+- Description: Isolate core business logic from external concerns
+- Benefits: Testability, Flexibility, Maintainability
+- Challenges: Initial complexity, Over-engineering risk
+- Use Cases: Complex business logic, Multiple interfaces, Long-term projects
+
+## Sample Query Prompts for Testing
+
+### E-commerce Platform Queries
+- "I need to design a scalable e-commerce platform that can handle 10k+ concurrent users, with considerations for cloud deployment and open source technologies"
+- "Design a microservices architecture for an online marketplace with real-time inventory management and payment processing"
+- "Create an architecture for a global e-commerce platform with multi-region deployment and CDN optimization"
+
+### Financial Services Queries
+- "Design a secure banking system architecture that can handle high-frequency trading and regulatory compliance"
+- "Create a fintech platform architecture for mobile payments with fraud detection and real-time processing"
+- "Design a blockchain-based financial system with smart contracts and decentralized architecture"
+
+### Healthcare & IoT Queries
+- "Design a healthcare IoT platform for patient monitoring with real-time data processing and HIPAA compliance"
+- "Create an architecture for a telemedicine platform with video streaming and electronic health records"
+- "Design a medical device data collection system with edge computing and cloud synchronization"
+
+### Social Media & Content Queries
+- "Design a social media platform architecture that can scale to millions of users with real-time messaging"
+- "Create a content management system for a media company with video streaming and recommendation engine"
+- "Design a real-time chat application architecture with message persistence and push notifications"
+
+### Enterprise & Legacy Queries
+- "Design a migration strategy from monolithic legacy systems to modern microservices architecture"
+- "Create an enterprise data platform architecture with data lakes, warehouses, and real-time analytics"
+- "Design a multi-tenant SaaS platform architecture with tenant isolation and custom branding"
+
+### Cloud & Infrastructure Queries
+- "Design a multi-cloud architecture strategy with disaster recovery and cost optimization"
+- "Create a serverless architecture for a data processing pipeline with event-driven workflows"
+- "Design a container orchestration strategy for a microservices application with auto-scaling"
+
+### Security & Compliance Queries
+- "Design a zero-trust security architecture for a distributed enterprise application"
+- "Create a GDPR-compliant data architecture with privacy by design principles"
+- "Design a secure API gateway architecture with authentication, authorization, and rate limiting"
+
+### Performance & Scalability Queries
+- "Design a high-performance database architecture for a real-time analytics platform"
+- "Create a caching strategy for a high-traffic web application with global distribution"
+- "Design a load balancing and auto-scaling architecture for a variable workload application"
+
+### Integration & API Queries
+- "Design an API-first architecture for a platform that integrates with 50+ third-party services"
+- "Create an event-driven integration architecture for real-time data synchronization"
+- "Design a service mesh architecture for microservices communication and observability"
+
+### Cost Optimization Queries
+- "Design a cost-effective cloud architecture for a startup with limited budget"
+- "Create a hybrid cloud strategy that optimizes costs while maintaining performance"
+- "Design a resource optimization strategy for containerized applications with dynamic scaling"
