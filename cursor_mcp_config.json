@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "marketing-analytics-mcp": {
+      "command": "python",
+      "args": [
+        "mcp_server_standalone.py"
+      ],
+      "env": {
+        "DATABRICKS_TOKEN": "${DATABRICKS_ACCESS_TOKEN}",
+        "DATABRICKS_URL": "https://${DATABRICKS_SERVER_HOSTNAME}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+      }
+    }
+  }
+}
+
+
+

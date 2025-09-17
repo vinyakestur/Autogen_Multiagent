@@ -1,0 +1,32 @@
+# Core FastAPI & WebSocket
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+
+# MCP Protocol
+mcp==0.5.0
+anthropic-mcp==0.1.0
+openai-mcp==0.1.0
+
+# LLM Providers
+openai==1.12.0
+anthropic==0.8.1
+
+# Database & Data
+databricks-sql-connector==3.0.1
+pandas==2.1.4
+
+# Agent Framework
+langgraph==0.0.28
+langchain==0.1.6
+langchain-community==0.0.20
+langchain-anthropic>=0.2.0
+langchain-core>=0.3.0
+
+# Utilities
+pydantic==2.5.0
+python-dotenv==1.0.0
+asyncio-mqtt==0.16.1
+
+# Frontend
+streamlit>=1.28.0

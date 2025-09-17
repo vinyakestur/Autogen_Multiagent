@@ -1,0 +1,111 @@
+{
+  "intent_patterns": {
+    "campaign_report": {
+      "patterns": [
+        "generate campaign report",
+        "campaign report",
+        "campaign performance",
+        "show me campaign data",
+        "campaign analysis",
+        "campaign summary"
+      ],
+      "function_name": "generate_campaign_report",
+      "priority": 1,
+      "requires_consent": true
+    },
+    "channel_performance": {
+      "patterns": [
+        "channel performance",
+        "channel breakdown",
+        "channel analysis",
+        "performance by channel",
+        "which channel is best"
+      ],
+      "function_name": "generate_channel_performance",
+      "priority": 1,
+      "requires_consent": true
+    },
+    "budget_analysis": {
+      "patterns": [
+        "budget analysis",
+        "budget report",
+        "spending analysis",
+        "budget utilization",
+        "cost analysis"
+      ],
+      "function_name": "generate_budget_analysis",
+      "priority": 1,
+      "requires_consent": true
+    },
+    "conversion_metrics": {
+      "patterns": [
+        "conversion metrics",
+        "conversion report",
+        "kpi report",
+        "conversion analysis",
+        "performance metrics"
+      ],
+      "function_name": "generate_conversion_metrics",
+      "priority": 1,
+      "requires_consent": true
+    }
+  },
+  "dynamic_query_triggers": [
+    "custom query",
+    "specific data",
+    "detailed analysis",
+    "complex report",
+    "ad-hoc query"
+  ],
+  "response_formats": {
+    "campaign_report": {
+      "charts": [
+        "bar",
+        "line",
+        "pie"
+      ],
+      "default_chart": "bar",
+      "chart_config": {
+        "x_axis": "campaign_name",
+        "y_axis": "total_conversions",
+        "title": "Campaign Performance"
+      }
+    },
+    "channel_performance": {
+      "charts": [
+        "pie",
+        "bar"
+      ],
+      "default_chart": "pie",
+      "chart_config": {
+        "x_axis": "channel",
+        "y_axis": "total_conversions",
+        "title": "Performance by Channel"
+      }
+    },
+    "budget_analysis": {
+      "charts": [
+        "bar",
+        "line"
+      ],
+      "default_chart": "bar",
+      "chart_config": {
+        "x_axis": "campaign_name",
+        "y_axis": "budget_utilization_pct",
+        "title": "Budget Utilization"
+      }
+    },
+    "conversion_metrics": {
+      "charts": [
+        "bar",
+        "line"
+      ],
+      "default_chart": "bar",
+      "chart_config": {
+        "x_axis": "campaign_name",
+        "y_axis": "conversion_rate",
+        "title": "Conversion Metrics"
+      }
+    }
+  }
+}

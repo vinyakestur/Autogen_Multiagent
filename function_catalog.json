@@ -1,0 +1,168 @@
+{
+  "functions": {
+    "generate_campaign_report": {
+      "description": "Generate comprehensive campaign performance report with JOINs and aggregations",
+      "sql_template": "\n                    SELECT \n                        c.campaign_id,\n                        c.campaign_name,\n                        c.status,\n                        c.channel,\n                        c.budget,\n                        c.start_date,\n                        c.end_date,\n                        COUNT(r.report_id) as total_reports,\n                        SUM(r.impressions) as total_impressions,\n                        SUM(r.clicks) as total_clicks,\n                        SUM(r.conversions) as total_conversions,\n                        SUM(r.cost) as total_cost,\n                        ROUND(AVG(r.CTR), 4) as avg_ctr,\n                        ROUND(AVG(r.CVR), 4) as avg_cvr,\n                        ROUND(SUM(r.cost) / NULLIF(SUM(r.conversions), 0), 2) as cost_per_conversion,\n                        ROUND(SUM(r.conversions) / NULLIF(SUM(r.clicks), 0) * 100, 2) as conversion_rate\n                    FROM main.default.campaigns c\n                    LEFT JOIN main.default.reports r ON c.campaign_id = r.campaign_id\n                    WHERE 1=1\n                    {filters}\n                    GROUP BY c.campaign_id, c.campaign_name, c.status, c.channel, c.budget, c.start_date, c.end_date\n                    ORDER BY total_conversions DESC\n                    ",
+      "parameters": {
+        "campaign_id": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by specific campaign ID"
+        },
+        "status": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by campaign status"
+        },
+        "channel": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by marketing channel"
+        },
+        "date_from": {
+          "type": "date",
+          "optional": true,
+          "description": "Start date filter"
+        },
+        "date_to": {
+          "type": "date",
+          "optional": true,
+          "description": "End date filter"
+        }
+      },
+      "output_format": {
+        "type": "campaign_report",
+        "fields": [
+          "campaign_id",
+          "campaign_name",
+          "status",
+          "channel",
+          "total_impressions",
+          "total_clicks",
+          "total_conversions",
+          "total_cost",
+          "avg_ctr",
+          "avg_cvr",
+          "cost_per_conversion",
+          "conversion_rate"
+        ]
+      }
+    },
+    "generate_channel_performance": {
+      "description": "Generate performance breakdown by marketing channel",
+      "sql_template": "\n                    SELECT \n                        c.channel,\n                        COUNT(DISTINCT c.campaign_id) as total_campaigns,\n                        SUM(r.impressions) as total_impressions,\n                        SUM(r.clicks) as total_clicks,\n                        SUM(r.conversions) as total_conversions,\n                        SUM(r.cost) as total_cost,\n                        ROUND(AVG(r.CTR), 4) as avg_ctr,\n                        ROUND(AVG(r.CVR), 4) as avg_cvr,\n                        ROUND(SUM(r.cost) / NULLIF(SUM(r.conversions), 0), 2) as cost_per_conversion\n                    FROM main.default.campaigns c\n                    LEFT JOIN main.default.reports r ON c.campaign_id = r.campaign_id\n                    WHERE 1=1\n                    {filters}\n                    GROUP BY c.channel\n                    ORDER BY total_conversions DESC\n                    ",
+      "parameters": {
+        "date_from": {
+          "type": "date",
+          "optional": true,
+          "description": "Start date filter"
+        },
+        "date_to": {
+          "type": "date",
+          "optional": true,
+          "description": "End date filter"
+        }
+      },
+      "output_format": {
+        "type": "channel_performance",
+        "fields": [
+          "channel",
+          "total_campaigns",
+          "total_impressions",
+          "total_clicks",
+          "total_conversions",
+          "total_cost",
+          "avg_ctr",
+          "avg_cvr",
+          "cost_per_conversion"
+        ]
+      }
+    },
+    "generate_budget_analysis": {
+      "description": "Generate budget analysis and spending insights",
+      "sql_template": "\n                    SELECT \n                        c.campaign_id,\n                        c.campaign_name,\n                        c.budget,\n                        SUM(r.cost) as actual_spend,\n                        ROUND((SUM(r.cost) / c.budget) * 100, 2) as budget_utilization_pct,\n                        c.budget - SUM(r.cost) as remaining_budget,\n                        SUM(r.conversions) as total_conversions,\n                        ROUND(SUM(r.cost) / NULLIF(SUM(r.conversions), 0), 2) as cost_per_conversion\n                    FROM main.default.campaigns c\n                    LEFT JOIN main.default.reports r ON c.campaign_id = r.campaign_id\n                    WHERE 1=1\n                    {filters}\n                    GROUP BY c.campaign_id, c.campaign_name, c.budget\n                    ORDER BY budget_utilization_pct DESC\n                    ",
+      "parameters": {
+        "campaign_id": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by specific campaign ID"
+        },
+        "status": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by campaign status"
+        }
+      },
+      "output_format": {
+        "type": "budget_analysis",
+        "fields": [
+          "campaign_id",
+          "campaign_name",
+          "budget",
+          "actual_spend",
+          "budget_utilization_pct",
+          "remaining_budget",
+          "total_conversions",
+          "cost_per_conversion"
+        ]
+      }
+    },
+    "generate_conversion_metrics": {
+      "description": "Generate detailed conversion metrics and KPIs",
+      "sql_template": "\n                    SELECT \n                        c.campaign_id,\n                        c.campaign_name,\n                        c.channel,\n                        SUM(r.impressions) as total_impressions,\n                        SUM(r.clicks) as total_clicks,\n                        SUM(r.conversions) as total_conversions,\n                        SUM(r.cost) as total_cost,\n                        ROUND(SUM(r.clicks) / NULLIF(SUM(r.impressions), 0) * 100, 2) as ctr,\n                        ROUND(SUM(r.conversions) / NULLIF(SUM(r.clicks), 0) * 100, 2) as cvr,\n                        ROUND(SUM(r.cost) / NULLIF(SUM(r.clicks), 0), 2) as cpc,\n                        ROUND(SUM(r.cost) / NULLIF(SUM(r.conversions), 0), 2) as cpa,\n                        ROUND(SUM(r.conversions) / NULLIF(SUM(r.impressions), 0) * 100, 2) as conversion_rate\n                    FROM main.default.campaigns c\n                    LEFT JOIN main.default.reports r ON c.campaign_id = r.campaign_id\n                    WHERE 1=1\n                    {filters}\n                    GROUP BY c.campaign_id, c.campaign_name, c.channel\n                    ORDER BY conversion_rate DESC\n                    ",
+      "parameters": {
+        "campaign_id": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by specific campaign ID"
+        },
+        "channel": {
+          "type": "string",
+          "optional": true,
+          "description": "Filter by marketing channel"
+        },
+        "date_from": {
+          "type": "date",
+          "optional": true,
+          "description": "Start date filter"
+        },
+        "date_to": {
+          "type": "date",
+          "optional": true,
+          "description": "End date filter"
+        }
+      },
+      "output_format": {
+        "type": "conversion_metrics",
+        "fields": [
+          "campaign_id",
+          "campaign_name",
+          "channel",
+          "total_impressions",
+          "total_clicks",
+          "total_conversions",
+          "total_cost",
+          "ctr",
+          "cvr",
+          "cpc",
+          "cpa",
+          "conversion_rate"
+        ]
+      }
+    }
+  },
+  "intent_mappings": {
+    "generate campaign report": "generate_campaign_report",
+    "campaign report": "generate_campaign_report",
+    "campaign performance": "generate_campaign_report",
+    "generate channel performance": "generate_channel_performance",
+    "channel breakdown": "generate_channel_performance",
+    "channel analysis": "generate_channel_performance",
+    "generate budget analysis": "generate_budget_analysis",
+    "budget report": "generate_budget_analysis",
+    "spending analysis": "generate_budget_analysis",
+    "generate conversion metrics": "generate_conversion_metrics",
+    "conversion report": "generate_conversion_metrics",
+    "kpi report": "generate_conversion_metrics"
+  }
+}
